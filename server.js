@@ -1,7 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
+const { randomInt } = require("mathjs");
 const app = express();
-
 app.use(morgan("dev"));
 // Routes
 
@@ -15,11 +15,10 @@ app.get("/greetings/:userName", (req, res) => {
 // 2. Rolling the Dice
 app.get("/roll/:number", (req, res) => {
   if (!Number(req.params.number)) {
-    res.send("You must specify a number");
-  } else {
-    const result = Math.floor(Math.random() * req.params.number);
-    res.send(`You rolled a ${result}`);
+    return res.send("You must specify a number");
   }
+  const result = randomInt(req.params.number);
+  return res.send(`You rolled a ${result}`);
 });
 
 //3. I Want THAT One!
