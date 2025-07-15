@@ -47,14 +47,11 @@ const shoes = [
 ];
 
 app.get("/shoes", (req, res) => {
-  console.log(req.query);
-  if (!req.query) {
-    console.log("No query");
-    res.send(shoes);
+  const { type, minPrice, maxPrice } = req.query;
+  if (!type || !minPrice || !maxPrice) {
+    //Used OR operator so if any parameter was missing it would return the whole list
+    return res.send(shoes);
   }
-  const maxPrice = req.query.maxPrice;
-  const minPrice = req.query.minPrice;
-  const type = req.query.type;
   const results = shoes.filter((shoe) => {
     if (
       shoe.type === type &&
