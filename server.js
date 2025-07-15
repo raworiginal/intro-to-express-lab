@@ -14,10 +14,11 @@ app.get("/greetings/:userName", (req, res) => {
 
 // 2. Rolling the Dice
 app.get("/roll/:number", (req, res) => {
-  if (!Number(req.params.number)) {
+  if (isNaN(req.params.number)) {
     return res.send("You must specify a number");
   }
-  const result = randomInt(req.params.number);
+  //I made the minimum
+  const result = randomInt(1, req.params.number);
   return res.send(`You rolled a ${result}`);
 });
 
