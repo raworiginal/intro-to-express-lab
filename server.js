@@ -1,6 +1,8 @@
 const express = require("express");
+const morgan = require("morgan");
 const app = express();
 
+app.use(morgan("dev"));
 // Routes
 
 // 1. Be Polite, Greet the User
